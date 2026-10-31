@@ -4,6 +4,7 @@
 #include "Command.h"
 #include "state_machine.h"
 #include "exec.h"
+#include "state_machineV2.h"
 
 int main()
 {
@@ -22,7 +23,7 @@ int main()
 		int pos = 0;
 		int del = 0;
 
-		while((del = input.find("|", pos)) != std::string::npos)
+		/*while((del = input.find("|", pos)) != std::string::npos)
 		{
 			raw_commands.push_back(input.substr(pos, (del - pos)));
 			pos = del+1;
@@ -34,8 +35,8 @@ int main()
 			cmds.push_back(command_preparation(raw_commands[i]));
 			if(raw_commands.size() > 1 && i !=(raw_commands.size() - 1))
 				cmds[i].pipe = true;
-		}
-
+		}*/
+		cmds = parse(input);
 		execute_command(cmds);
 
 		clear_args(cmds);
