@@ -2,7 +2,7 @@
 
 #include "Command.h"
 #include <cstring>
-#include <fcntl.h>
+#include <fcntl.h>//O_CREAT | O_WRONLY | O_TRUNC | O_APPEND
 #include <vector>
 
 #define STATE_DEFAULT        0x1

@@ -119,12 +119,22 @@ bool execute_internal_command(Command& cmd)
 
 	if(( std::strcmp(cmd.argv[0], "color") == 0 ) && cmd.argv.size() > 2)
 	{
+		if(std::strcmp(cmd.argv[1], "default") == 0)
+			std::cout << "\033[0m";
+		if(std::strcmp(cmd.argv[1], "black") == 0)
+			std::cout << "\033[30m";
 		if(std::strcmp(cmd.argv[1], "red") == 0)
 			std::cout << "\033[31m";
 		if(std::strcmp(cmd.argv[1], "green") == 0)
 			std::cout << "\033[32m";
-		if(std::strcmp(cmd.argv[1], "default") == 0)
-			std::cout << "\033[0m";
+		if(std::strcmp(cmd.argv[1], "yellow") == 0)
+			std::cout << "\033[33m";
+		if(std::strcmp(cmd.argv[1], "navy") == 0)
+			std::cout << "\033[34m";
+		if(std::strcmp(cmd.argv[1], "purple") == 0)
+			std::cout << "\033[35m";
+		if(std::strcmp(cmd.argv[1], "blue") == 0)
+			std::cout << "\033[36m";
 	}
 
 	return false;

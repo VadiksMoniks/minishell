@@ -5,9 +5,3 @@ const char* internal_commands[] = {
 	"cd",
 	"color"
 };
-
-const char* colors[] = {
-    "red",
-    "green",
-    "default"
-};
