@@ -1,5 +1,7 @@
 #pragma once
-
+/**
+ * DEPRECATED!!!!!!!
+ */
 #include "Command.h"
 #include <cstring>
 #include <fcntl.h>//O_CREAT | O_WRONLY | O_TRUNC | O_APPEND

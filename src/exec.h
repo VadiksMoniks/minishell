@@ -7,6 +7,8 @@
 #include <cstring>
 #include <unistd.h>
 #include <sys/wait.h>// wait
+#include "internal_commands.h"
+
 void execute_external_command(Command& cmd)
 {
 	pid_t pid = fork();
@@ -115,13 +117,19 @@ bool execute_internal_command(Command& cmd)
 		return true;
 	}
 
+	if(( std::strcmp(cmd.argv[0], "color") == 0 ) && cmd.argv.size() > 2)
+	{
+		if(std::strcmp(cmd.argv[1], "red") == 0)
+			std::cout << "\033[31m";
+		if(std::strcmp(cmd.argv[1], "green") == 0)
+			std::cout << "\033[32m";
+		if(std::strcmp(cmd.argv[1], "default") == 0)
+			std::cout << "\033[0m";
+	}
+
 	return false;
 }
 
-/*
-** МОГУТ БЫТЬ ПРОБЛЕМЫ ПРИ ПАРСИНГЕ, ЕСЛИ НАПИСАТЬ | В КОНЦЕ СТРОКИ ИЛИ ПОСЛЕ ПАЙПА ЕЩЕ ДОБАВИТЬ ПРОБЕЛ В КОНЦЕ СТРОКИ,
-** ВОЗМОЖНО ПРОГРАММА ПОСЧИТАЕТ ЧТО ЕСТЬ ЕЩЕ ОДНА КОМАНДА
-*/
 void execute_command(std::vector<Command>& cmds)
 {	
 		if(cmds.size() > 1)

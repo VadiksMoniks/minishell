@@ -94,7 +94,7 @@ std::vector<Command> parse(const std::string& input)
 
             case STATE_SINGLE_QUOTES:
                 if(c == '\''){
-                   current_state = STATE_DEFAULT;
+                    current_state = STATE_DEFAULT;
                     flush_token(token, cmd, redirect_type); 
                 } 
                 else

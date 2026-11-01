@@ -10,11 +10,6 @@ struct Command{
 	bool pipe = false;
 };
 
-const char* internal_commands[] = {
-	"exit",
-	"cd"
-};
-
 void clear_args(std::vector<Command>& cmds)
 {
 	for(int i = 0; i<cmds.size(); i++)
