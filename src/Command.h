@@ -8,16 +8,16 @@ struct Command{
 	std::string filename;
 	int flags = 0;	
 	bool pipe = false;
-};
 
-void clear_args(std::vector<Command>& cmds)
-{
-	for(int i = 0; i<cmds.size(); i++)
+	~Command()
 	{
-		for(int j =0; j<cmds[i].argv.size(); j++)
+		for(int i = 0; i<cmds.size(); i++)
 		{
-			if(cmds[i].argv[j] != nullptr)
-				free(cmds[i].argv[j]);
+			for(int j =0; j<cmds[i].argv.size(); j++)
+			{
+				if(cmds[i].argv[j] != nullptr)
+					free(cmds[i].argv[j]);
+			}
 		}
 	}
-}
+};

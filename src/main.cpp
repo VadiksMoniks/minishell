@@ -17,6 +17,9 @@ int main()
 		
 		std::getline(std::cin, input);
 
+		if(input.empty())
+			continue;
+			
 		std::vector<std::string> raw_commands;
 
 		int pos = 0;
