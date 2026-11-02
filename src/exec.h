@@ -30,12 +30,11 @@ void execute_external_command(Command& cmd)
 				dup2(fd, STDOUT_FILENO);
 			else if((cmd.flags & O_ACCMODE) == O_RDONLY)
 				dup2(fd, STDIN_FILENO);
+
+			if(cmd.flags != -1)
+				close(fd);
 		}
-		execvp(cmd.argv[0], cmd.argv.data());
-		
-		if(cmd.flags != -1)
-			close(fd);
-			
+		execvp(cmd.argv[0], cmd.argv.data());	
 		exit(EXIT_FAILURE);
 			
 	}
