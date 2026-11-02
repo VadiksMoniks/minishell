@@ -22,14 +22,12 @@ int main()
 			
 		std::vector<std::string> raw_commands;
 
-		int pos = 0;
-		int del = 0;
-
 		cmds = parse(input);
+		if(cmds.empty())
+			continue;
+			
 		execute_command(cmds);
-
-		clear_args(cmds);
 		
-		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 }

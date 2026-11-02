@@ -20,7 +20,7 @@ void execute_external_command(Command& cmd)
 	{
 
 		int fd;
-		if(cmd.flags != 0)
+		if(cmd.flags != -1)
 		{
 
 			fd = open(cmd.filename.data(), cmd.flags, 0644);
@@ -28,15 +28,15 @@ void execute_external_command(Command& cmd)
 
 			if(access_flag == O_WRONLY)
 				dup2(fd, STDOUT_FILENO);
-			else if(access_flag == O_RDONLY)
+			else if((cmd.flags & O_ACCMODE) == O_RDONLY)
 				dup2(fd, STDIN_FILENO);
 		}
 		execvp(cmd.argv[0], cmd.argv.data());
 		
-		exit(EXIT_FAILURE);
-
-		if(cmd.flags != 0)
+		if(cmd.flags != -1)
 			close(fd);
+			
+		exit(EXIT_FAILURE);
 			
 	}
 	else if(pid > 0)
@@ -102,6 +102,10 @@ void execute_pipeline(std::vector<Command>& cmds)
 		}
 	}
 
+	if (prev_descriptor != -1) {
+		close(prev_descriptor);
+	}
+
 	for(pid_t pid : pids)
 		waitpid(pid, nullptr, 0);
 }
@@ -135,6 +139,8 @@ bool execute_internal_command(Command& cmd)
 			std::cout << "\033[35m";
 		if(std::strcmp(cmd.argv[1], "blue") == 0)
 			std::cout << "\033[36m";
+
+		return true;
 	}
 
 	return false;
